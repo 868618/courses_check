@@ -1,0 +1,38 @@
+{
+  "name": "watch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx ts-node -r tsconfig-paths/register --project tsconfig.json ./src/index.ts",
+    "test": "npx ts-node -r tsconfig-paths/register --project tsconfig.json ./src/test.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.5",
+    "@types/fs-extra": "^11.0.4",
+    "@types/lodash": "^4.14.202",
+    "@types/pdf-parse": "^1.1.4",
+    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/parser": "^6.13.2",
+    "eslint": "^8.55.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "prettier": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@types/node": "^20.10.4",
+    "eslint-define-config": "^2.0.0",
+    "fs-extra": "^11.2.0",
+    "glob": "^10.3.10",
+    "libreoffice-convert": "^1.5.1",
+    "lodash": "^4.17.21"
+  },
+  "prettier": {
+    "semi": false
+  }
+}
