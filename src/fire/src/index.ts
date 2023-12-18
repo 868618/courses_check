@@ -40,7 +40,7 @@ interface IOptions {
   }
 }
 
-const fire: ICore = options => {
+const fire: ICore = (options) => {
   return {
     async go() {
       const {
@@ -67,7 +67,7 @@ const fire: ICore = options => {
 
         Array.from({ length: maxEngines }).forEach(() => cluster.fork())
 
-        cluster.on('online', worker => {
+        cluster.on('online', (worker) => {
           main && main(cluster, worker, singletonInstance)
 
           worker.on('message', ({ type }) => {
@@ -85,7 +85,7 @@ const fire: ICore = options => {
         })
 
         // 子进程退出时候的监听
-        cluster.on('exit', worker => {
+        cluster.on('exit', (worker) => {
           monitor?.workerExit && monitor.workerExit(worker)
 
           if (dataSource.length && ['single', 'manual'].includes(mode)) {
@@ -109,7 +109,7 @@ const fire: ICore = options => {
 
         // const close = () => cluster.worker?.kill()
 
-        cluster.worker?.on('message', async message => {
+        cluster.worker?.on('message', async (message) => {
           monitor?.letter && monitor.letter(cluster.worker, message)
 
           const { type, payload } = message
@@ -117,7 +117,7 @@ const fire: ICore = options => {
           if (type == 'supply') {
             try {
               await tasks.reduce(
-                (p, c) => p.then(d => c(d, cluster.worker)),
+                (p, c) => p.then((d) => c(d, cluster.worker)),
                 Promise.resolve(payload),
               )
 

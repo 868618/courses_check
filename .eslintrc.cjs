@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { defineConfig } = require("eslint-define-config")
+const { defineConfig } = require('eslint-define-config')
 
 module.exports = defineConfig({
   root: true,
@@ -10,24 +10,27 @@ module.exports = defineConfig({
     node: true,
   },
 
-  extends: ["eslint:recommended"],
+  extends: ['eslint:recommended'],
 
   overrides: [
     {
-      files: ["*.ts"],
-      parser: "@typescript-eslint/parser",
-      extends: ["plugin:@typescript-eslint/recommended"],
+      files: ['*.ts'],
+      parser: '@typescript-eslint/parser',
+      extends: ['plugin:@typescript-eslint/recommended'],
       parserOptions: {
-        ecmaVersion: "latest",
-        sourceType: "module",
+        ecmaVersion: 'latest',
+        sourceType: 'module',
       },
 
-      plugins: ["@typescript-eslint", "prettier"],
+      plugins: ['@typescript-eslint', 'prettier'],
     },
   ],
 
   rules: {
-    "prettier/prettier": "error",
-    "no-async-promise-executor": 0,
+    'prettier/prettier': 'error',
+    'no-async-promise-executor': 0,
+    // prettier: {
+    //   'no-async-promise-executor': 0,
+    // },
   },
 })

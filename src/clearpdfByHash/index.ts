@@ -1,15 +1,15 @@
-import path from "path"
-import crypto from "crypto"
-import fs from "fs"
-import * as glob from "glob"
+import path from 'path'
+import crypto from 'crypto'
+import fs from 'fs'
+import * as glob from 'glob'
 // import lodash from "lodash"
-import pdf2text from "../pdf2text"
+import pdf2text from '../pdf2text'
 
 export default async (dirPath: string) => {
-  process.env.NODE_GLOB_WINDOWS_PATHS_NO_ESCAPE = "true"
+  process.env.NODE_GLOB_WINDOWS_PATHS_NO_ESCAPE = 'true'
 
   const pdfFilePaths = glob
-    .sync(path.join(dirPath, "*.pdf"))
+    .sync(path.join(dirPath, '*.pdf'))
     .sort((a, b) => a.length - b.length)
 
   // console.log("AT-[ pdfFilePaths &&&&&********** ]", pdfFilePaths)
@@ -17,14 +17,14 @@ export default async (dirPath: string) => {
   const result: { pdfFilePath: string; hash: string }[] = []
 
   for (const pdfFilePath of pdfFilePaths) {
-    let hash = ""
+    let hash = ''
 
     try {
       const text = await pdf2text(pdfFilePath)
 
-      hash = crypto.createHash("md5").update(text.slice(0, 150)).digest("hex")
+      hash = crypto.createHash('md5').update(text.slice(0, 150)).digest('hex')
     } catch (error) {
-      console.log("AT-[ error &&&&&********** ]", error)
+      console.log('AT-[ error &&&&&********** ]', error)
       // fs.rmSync(pdfFilePath)
     } finally {
       result.push({ pdfFilePath, hash })

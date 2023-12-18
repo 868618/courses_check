@@ -1,39 +1,44 @@
-import fs from "fs-extra"
-import * as glob from "glob"
-import path from "path"
-import os from "os"
-import lodash from "lodash"
+import fs from 'fs-extra'
+import * as glob from 'glob'
+import path from 'path'
+// import os from 'os'
+import lodash from 'lodash'
 
-import clearpdfByHash from "./clearpdfByHash"
-import fire from "./fire"
-import autorename from "./autorename"
-import word2pdf from "./word2pdf"
+import clearpdfByHash from './clearpdfByHash'
+import fire from './fire'
+import autorename from './autorename'
+import word2pdf from './word2pdf'
+// import { type Worker } from 'cluster'
 
-process.env.NODE_GLOB_WINDOWS_PATHS_NO_ESCAPE = "true"
+process.env.NODE_GLOB_WINDOWS_PATHS_NO_ESCAPE = 'true'
 
 const instance = fire({
   maxEngines: 8,
 
-  mode: "single",
+  mode: 'single',
 
   async data() {
-    const desktopPath = path.join(os.homedir(), "Desktop")
+    // const desktopPath = path.join(os.homedir(), 'Desktop')
 
-    const basePath = path.join(desktopPath, "uuu")
+    const basePath = path.join('E:target')
 
-    const list = glob.sync(path.join(basePath, "*/"))
+    const list = glob.sync(path.join(basePath, '*/'), {
+      windowsPathsNoEscape: true,
+    })
     return lodash.chunk(list, 100)
   },
 
   tasks: [
-    async (data) => {
+    async (data: unknown) => {
       for (const dirPath of data as string[]) {
-        const docFiles = glob.sync(path.join(dirPath, "*.{doc,docx}"))
+        const docFiles = glob.sync(path.join(dirPath, '*.{doc,docx}'), {
+          windowsPathsNoEscape: true,
+        })
 
         for (const docFile of docFiles) {
           const tempPdfFilePath = await word2pdf(docFile)
 
-          const targetPdfFilePath = autorename(docFile, "pdf")
+          const targetPdfFilePath = autorename(docFile, 'pdf')
 
           fs.moveSync(tempPdfFilePath, targetPdfFilePath)
 
@@ -51,7 +56,7 @@ const instance = fire({
 
   monitor: {
     async letter(worker) {
-      console.log("AT-[ worker &&&&&********** ]", worker?.id)
+      console.log('AT-[ worker &&&&&********** ]', worker?.id)
     },
   },
 })

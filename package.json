@@ -1,11 +1,11 @@
 {
-  "name": "watch",
+  "name": "pdd",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "npx ts-node -r tsconfig-paths/register --project tsconfig.json ./src/index.ts",
-    "test": "npx ts-node -r tsconfig-paths/register --project tsconfig.json ./src/test.ts"
+    "scan": "npx ts-node -r tsconfig-paths/register --project tsconfig.json ./src/scan.ts"
   },
   "keywords": [],
   "author": "",
@@ -33,6 +33,8 @@
     "lodash": "^4.17.21"
   },
   "prettier": {
-    "semi": false
+    "semi": false,
+    "endOfLine": "auto",
+    "singleQuote": true
   }
 }

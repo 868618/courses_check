@@ -1,5 +1,5 @@
 // import PDFParser from "pdf2json"
-import { exec } from "child_process"
+import { exec } from 'child_process'
 
 export default async (pdfFilePath: string): Promise<string> =>
   new Promise((resolve, reject) => {
@@ -8,6 +8,6 @@ export default async (pdfFilePath: string): Promise<string> =>
     exec(command, (error, stdout, stderr) => {
       error
         ? reject({ error, stderr })
-        : resolve(stdout.trim().replace(/\s/gi, ""))
+        : resolve(stdout.trim().replace(/\s/gi, ''))
     })
   })
